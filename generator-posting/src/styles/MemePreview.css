@@ -1,0 +1,78 @@
+/* Estilização da pré-visualização do meme, incluindo avatar, texto e imagem */
+
+.meme-preview {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 60px;
+    width: 900px;
+    box-sizing: border-box;
+    position: relative;
+  }
+  
+  .tweet-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
+  
+  .tweet-info {
+    line-height: 1.2;
+  }
+  
+  .tweet-info strong {
+    font-size: 30px;
+  }
+  
+  .tweet-info span {
+    color: #777;
+    font-size: 18px;
+  }
+  
+  .tweet-text {
+    margin-top: 30px;
+    font-size: 18px;
+    font-style: italic;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  
+  .meme-image-container {
+    position: relative;
+    margin-top: 40px;
+    background-color: black;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .meme-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+  }
+  
+  .meme-caption {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px black;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+@media (max-width: 960px) {
+    .meme-preview {
+        width: 95%;
+        padding: 30px;
+    }
+}
