@@ -6,47 +6,59 @@ import '../styles/MemeButtons.css'
 
 /**
  * Componente responsável pelos botões de ação do meme
- * Permite ao usuário baixar a imagem gerada e resetar os campos
+ * Permite ao usuário baixar a imagem gerada, resetar os campos e fazer upload de imagens
  */
-function MemeButtons({ setCustomText, setImageSrc, defaultImage, defaultText, onDownload, onReset }) {
-  // Verificação básica de props
-  if (!setCustomText || !setImageSrc) {
-    console.error('Propriedades necessárias não foram fornecidas ao MemeButtons')
-    return null
-  }
-
-  const handleDownload = () => {
-    const memeElement = document.getElementById('meme-preview')
-    if (!memeElement) {
-      console.error('Elemento meme-preview não encontrado')
-      return
-    }
-
-    toPng(memeElement)
-      .then((dataUrl) => {
-        const link = document.createElement('a')
-        link.download = 'meme-safadinho.png'
-        link.href = dataUrl
-        link.click()
-      })
-      .catch((error) => {
-        console.error('Erro ao gerar a imagem:', error)
-      })
-  }
-
-  const handleReset = () => {
-    setCustomText(defaultText)
-    setImageSrc(defaultImage)
-  }
+function MemeButtons({ 
+  setCustomText, 
+  setImageSrc, 
+  setImageProfile,
+  defaultImage, 
+  defaultText, 
+  onDownload, 
+  onReset, 
+  handleImageUpload,
+  handleProfileImageUpload 
+}) {
 
   return (
-    <div className="buttons">
-      <button id="download-btn" onClick={onDownload || handleDownload}>
-        Baixar Meme
-      </button>
-      <button id="reset-btn" onClick={onReset || handleReset}>
-        Resetar
-      </button>
+    <div className="button-container">
+      {/* Grupo de botões de upload */}
+      <div className="button-row">
+        <div className="button-group">
+          <input
+            type="file"
+            id="profile-image-upload"
+            accept="image/*"
+            onChange={handleProfileImageUpload}
+            style={{ display: 'none' }}
+          />
+          <input
+            type="file"
+            id="post-image-upload"
+            accept="image/*"
+            onChange={handleImageUpload}
+            style={{ display: 'none' }}
+          />
+          <label htmlFor="profile-image-upload" className="button upload-button-profile">
+            Escolher Imagem Perfil
+          </label>
+          <label htmlFor="post-image-upload" className="button upload-button-post">
+            Escolher Imagem Post
+          </label>
+        </div>
+      </div>
+      
+      {/* Grupo de botões de ação */}
+      <div className="button-row">
+        <div className="button-group">
+          <button className="button download-button" onClick={onDownload}>
+            Baixar
+          </button>
+          <button className="button reset-button" onClick={onReset}>
+            Resetar
+          </button>
+        </div>
+      </div>
     </div>
   )
 }
@@ -55,10 +67,13 @@ function MemeButtons({ setCustomText, setImageSrc, defaultImage, defaultText, on
 MemeButtons.propTypes = {
   setCustomText: PropTypes.func.isRequired,
   setImageSrc: PropTypes.func.isRequired,
+  setImageProfile: PropTypes.func.isRequired,
   defaultImage: PropTypes.string.isRequired,
   defaultText: PropTypes.string.isRequired,
   onDownload: PropTypes.func,
-  onReset: PropTypes.func
+  onReset: PropTypes.func,
+  handleImageUpload: PropTypes.func.isRequired,
+  handleProfileImageUpload: PropTypes.func.isRequired
 }
 
 export default MemeButtons

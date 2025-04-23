@@ -5,6 +5,7 @@ import MemePreview from './components/MemePreview'
 import MemeButtons from './components/MemeButtons'
 import imagemInicial from './images/coringa.jpeg'
 import './App.css'
+import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa'
 
 function App() {
   // Configurações iniciais
@@ -92,45 +93,53 @@ function App() {
       <h1 className="text-3xl font-bold mb-8">Gerador de Posting</h1>
       <TextInput customText={customText} setCustomText={setCustomText} />
       <div className="meme-container">
-        <div className="image-upload-container">
-          <input
-            type="file"
-            id="post-image-upload" // ID único para post
-            accept="image/*"
-            onChange={handleImageUpload}
-            style={{ display: 'none' }}
-          />
-          <input
-            type="file"
-            id="profile-image-upload" // ID único para profile
-            accept="image/*"
-            onChange={handleProfileImageUpload} // Novo handler
-            style={{ display: 'none' }}
-          />
-          <label htmlFor="post-image-upload" className="upload-button-post">
-            Escolher Imagem Post
-          </label>
-          <label htmlFor="profile-image-upload" className="upload-button-profile">
-            Escolher Imagem Perfil
-          </label>
-        </div>
+        <MemeButtons 
+          setCustomText={setCustomText}
+          setImageSrc={setImageSrc}
+          setImageProfile={setImageProfile}
+          defaultImage={defaultImage}
+          defaultText={defaultText}
+          onDownload={handleDownload}
+          onReset={handleReset}
+          handleImageUpload={handleImageUpload}
+          handleProfileImageUpload={handleProfileImageUpload}
+        />
         <MemePreview 
           customText={customText} 
           imageSrc={imageSrc}
-          imageProfile={imageProfile} // Adicionar esta prop
+          imageProfile={imageProfile}
         />
-        <div className="buttons-container mt-4">
-          <MemeButtons 
-            setImageProfile={setImageProfile}
-            setCustomText={setCustomText}
-            setImageSrc={setImageSrc}
-            defaultImage={defaultImage}
-            defaultText={defaultText}
-            onDownload={handleDownload}
-            onReset={handleReset}
-          />
-        </div>
       </div>
+      <footer className="footer">
+      <p className="footer-text">Desenvolvido por Jhonathancs</p>
+        <div className="social-icons">
+          <a 
+            href="https://github.com/jhonathancs" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="social-icon"
+          >
+            <FaGithub />
+          </a>
+          <a 
+            href="https://www.linkedin.com/in/jhonathan-cs/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="social-icon"
+          >
+            <FaLinkedin />
+          </a>
+          <a 
+            href="https://www.instagram.com/jhonathan_jcs/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="social-icon"
+          >
+            <FaInstagram />
+          </a>
+        </div>
+       
+      </footer>
     </div>
   )
 }

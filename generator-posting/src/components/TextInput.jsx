@@ -29,7 +29,7 @@ function TextInput({ customText, setCustomText }) {
   return (
     <div className="input-container">
       <label htmlFor="custom-text-input" className="input-label">
-        Escreva aqui sua frase:
+        Escreva abaixo sua frase:
       </label>
       <textarea
         id="custom-text-input"
