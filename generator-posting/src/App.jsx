@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import TextInput from './components/TextInput'
 import MemePreview from './components/MemePreview'
 import MemeButtons from './components/MemeButtons'
+import FontControls from './components/FontControls'
 import imagemInicial from './images/coringa.jpeg'
 import './App.css'
 import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa'
@@ -23,18 +24,39 @@ function App() {
   const [customText, setCustomText] = useState(defaultText)
   const [imageSrc, setImageSrc] = useState(defaultImage)
 
-  // Estados com valores do localStorage ou valores padrão
-  const [profileName, setProfileName] = useState(() => {
-    return localStorage.getItem('profileName') || 'LifeSad'
-  })
+  // Estados inicializados com valores do localStorage ou valores padrão
+  const [profileName, setProfileName] = useState(() => 
+    localStorage.getItem('profileName') || 'LifeSad'
+  )
 
-  const [userName, setUserName] = useState(() => {
-    return localStorage.getItem('userName') || 'EleGosta_4gmal'
-  })
+  const [userName, setUserName] = useState(() => 
+    localStorage.getItem('userName') || 'EleGosta_4gmal'
+  )
 
-  const [watermark, setWatermark] = useState(() => {
-    return localStorage.getItem('watermark') || 'ThugLife'
-  })
+  const [watermark, setWatermark] = useState(() => 
+    localStorage.getItem('watermark') || 'ThugLife'
+  )
+
+  // Estados para tamanhos de fonte
+  const [profileFontSize, setProfileFontSize] = useState(() => 
+    localStorage.getItem('profileFontSize') || '30'
+  )
+
+  const [usernameFontSize, setUsernameFontSize] = useState(() => 
+    localStorage.getItem('usernameFontSize') || '18'
+  )
+
+  const [watermarkFontSize, setWatermarkFontSize] = useState(() => 
+    localStorage.getItem('watermarkFontSize') || '22'
+  )
+
+  const [textFontSize, setTextFontSize] = useState(() => 
+    localStorage.getItem('textFontSize') || '30'
+  )
+
+  const [profilePicSize, setProfilePicSize] = useState(() => 
+    localStorage.getItem('profilePicSize') || '120'
+  )
 
   // Salva a imagem do perfil no localStorage quando ela mudar
   useEffect(() => {
@@ -53,6 +75,27 @@ function App() {
   useEffect(() => {
     localStorage.setItem('watermark', watermark)
   }, [watermark])
+
+  // Efeitos para salvar no localStorage quando os valores mudarem
+  useEffect(() => {
+    localStorage.setItem('profileFontSize', profileFontSize)
+  }, [profileFontSize])
+
+  useEffect(() => {
+    localStorage.setItem('usernameFontSize', usernameFontSize)
+  }, [usernameFontSize])
+
+  useEffect(() => {
+    localStorage.setItem('watermarkFontSize', watermarkFontSize)
+  }, [watermarkFontSize])
+
+  useEffect(() => {
+    localStorage.setItem('textFontSize', textFontSize)
+  }, [textFontSize])
+
+  useEffect(() => {
+    localStorage.setItem('profilePicSize', profilePicSize)
+  }, [profilePicSize])
 
   const handleDownload = () => {
     const meme = document.getElementById('meme-preview')
@@ -81,11 +124,21 @@ function App() {
     setProfileName('LifeSad')
     setUserName('EleGosta_4gmal')
     setWatermark('ThugLife')
+    setProfileFontSize('30')
+    setUsernameFontSize('18')
+    setWatermarkFontSize('22')
+    setTextFontSize('18')
+    setProfilePicSize('120')
     
     // Limpa o localStorage
     localStorage.removeItem('profileName')
     localStorage.removeItem('userName')
     localStorage.removeItem('watermark')
+    localStorage.removeItem('profileFontSize')
+    localStorage.removeItem('usernameFontSize')
+    localStorage.removeItem('watermarkFontSize')
+    localStorage.removeItem('textFontSize')
+    localStorage.removeItem('profilePicSize')
 
     // Reset do texto
     setCustomText(defaultText)
@@ -137,6 +190,14 @@ function App() {
         setUserName={setUserName}    // Nova prop
         watermark={watermark}         // Nova prop
         setWatermark={setWatermark}  // Nova prop
+        profileFontSize={profileFontSize}
+        setProfileFontSize={setProfileFontSize}
+        usernameFontSize={usernameFontSize}
+        setUsernameFontSize={setUsernameFontSize}
+        watermarkFontSize={watermarkFontSize}
+        setWatermarkFontSize={setWatermarkFontSize}
+        textFontSize={textFontSize}
+        setTextFontSize={setTextFontSize}
       />
       <div className="meme-container">
         <MemeButtons 
@@ -157,8 +218,25 @@ function App() {
           profileName={profileName} // Nova prop
           userName={userName}         // Nova prop
           watermark={watermark}      // Nova prop
+          profileFontSize={profileFontSize}
+          usernameFontSize={usernameFontSize}
+          watermarkFontSize={watermarkFontSize}
+          textFontSize={textFontSize}
+          profilePicSize={profilePicSize}
         />
       </div>
+      <FontControls 
+        profileFontSize={profileFontSize}
+        setProfileFontSize={setProfileFontSize}
+        usernameFontSize={usernameFontSize}
+        setUsernameFontSize={setUsernameFontSize}
+        watermarkFontSize={watermarkFontSize}
+        setWatermarkFontSize={setWatermarkFontSize}
+        textFontSize={textFontSize}
+        setTextFontSize={setTextFontSize}
+        profilePicSize={profilePicSize}
+        setProfilePicSize={setProfilePicSize}
+      />
       <footer className="footer">
       <p className="footer-text">Desenvolvido por Jhonathancs</p>
         <div className="social-icons">
