@@ -5,25 +5,27 @@
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 60px;
-    width: 900px;
+    width: 1000px;
     box-sizing: border-box;
     position: relative;
   }
   
   .tweet-header {
+    margin-top: 5px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 20px;
   }
   
   .profile-pic {
-    width: 100px;
-    height: 100px;
+    margin-left: -20px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
   }
   
   .tweet-info {
-    line-height: 1.2;
+    line-height: 1;
   }
   
   .tweet-info strong {
@@ -87,6 +89,7 @@
 }
 
 @media (max-width: 640px) {
+
     .tweet-info strong {
         font-size: 24px;
     }
@@ -99,6 +102,13 @@
     .profile-pic {
         width: 60px;  /* Reduzido ainda mais */
         height: 60px;
+    }
+
+    .tweet-header {
+      margin-top: 5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 }
 
