@@ -8,7 +8,7 @@ import '../styles/MemeButtons.css'
  * Componente responsável pelos botões de ação do meme
  * Permite ao usuário baixar a imagem gerada e resetar os campos
  */
-function MemeButtons({ setCustomText, setImageSrc, defaultImage, defaultText }) {
+function MemeButtons({ setCustomText, setImageSrc, defaultImage, defaultText, onDownload, onReset }) {
   // Verificação básica de props
   if (!setCustomText || !setImageSrc) {
     console.error('Propriedades necessárias não foram fornecidas ao MemeButtons')
@@ -41,10 +41,10 @@ function MemeButtons({ setCustomText, setImageSrc, defaultImage, defaultText }) 
 
   return (
     <div className="buttons">
-      <button id="download-btn" onClick={handleDownload}>
+      <button id="download-btn" onClick={onDownload || handleDownload}>
         Baixar Meme
       </button>
-      <button id="reset-btn" onClick={handleReset}>
+      <button id="reset-btn" onClick={onReset || handleReset}>
         Resetar
       </button>
     </div>
@@ -56,7 +56,9 @@ MemeButtons.propTypes = {
   setCustomText: PropTypes.func.isRequired,
   setImageSrc: PropTypes.func.isRequired,
   defaultImage: PropTypes.string.isRequired,
-  defaultText: PropTypes.string.isRequired
+  defaultText: PropTypes.string.isRequired,
+  onDownload: PropTypes.func,
+  onReset: PropTypes.func
 }
 
 export default MemeButtons

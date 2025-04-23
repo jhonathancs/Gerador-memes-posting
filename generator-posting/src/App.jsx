@@ -1,5 +1,5 @@
 // File: src/App.jsx
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import TextInput from './components/TextInput'
 import MemePreview from './components/MemePreview'
 import MemeButtons from './components/MemeButtons'
@@ -7,11 +7,25 @@ import imagemInicial from './images/coringa.jpeg'
 import './App.css'
 
 function App() {
+  // Configurações iniciais
   const defaultText = 'POV: " Você fuma muito? "\n\nEu às 6:00 da manhã:'
-  const [defaultImage, setDefaultImage] = useState(imagemInicial)
+  const initialImage = imagemInicial
+
+  const [defaultImage, setDefaultImage] = useState(initialImage)
+  
+  // Recupera a imagem do perfil do localStorage ou usa a imagem inicial
+  const [imageProfile, setImageProfile] = useState(() => {
+    const savedProfile = localStorage.getItem('profileImage')
+    return savedProfile || initialImage
+  })
   
   const [customText, setCustomText] = useState(defaultText)
   const [imageSrc, setImageSrc] = useState(defaultImage)
+
+  // Salva a imagem do perfil no localStorage quando ela mudar
+  useEffect(() => {
+    localStorage.setItem('profileImage', imageProfile)
+  }, [imageProfile])
 
   const handleDownload = () => {
     const meme = document.getElementById('meme-preview')
@@ -35,8 +49,19 @@ function App() {
   }
 
   const handleReset = () => {
+    // Reset do texto
     setCustomText(defaultText)
-    setImageSrc(defaultImage)
+    
+    // Reset das imagens
+    setDefaultImage(initialImage)
+    setImageSrc(initialImage)
+    setImageProfile(initialImage)
+    
+    // Limpa o localStorage
+    localStorage.removeItem('profileImage')
+    
+    // Opcional: Adiciona feedback visual
+    alert('Todas as configurações foram restauradas!')
   }
 
   const handleImageUpload = (event) => {
@@ -49,6 +74,19 @@ function App() {
     }
   }
 
+  const handleProfileImageUpload = (event) => {
+    const file = event.target.files[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        const base64String = reader.result
+        setImageProfile(base64String)
+        localStorage.setItem('profileImage', base64String)
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
   return (
     <div className="flex flex-col items-center bg-gray-100 min-h-screen p-6">
       <h1 className="text-3xl font-bold mb-8">Gerador de Posting</h1>
@@ -57,21 +95,33 @@ function App() {
         <div className="image-upload-container">
           <input
             type="file"
-            id="image-upload"
+            id="post-image-upload" // ID único para post
             accept="image/*"
             onChange={handleImageUpload}
             style={{ display: 'none' }}
           />
-          <label htmlFor="image-upload" className="upload-button-post">
+          <input
+            type="file"
+            id="profile-image-upload" // ID único para profile
+            accept="image/*"
+            onChange={handleProfileImageUpload} // Novo handler
+            style={{ display: 'none' }}
+          />
+          <label htmlFor="post-image-upload" className="upload-button-post">
             Escolher Imagem Post
           </label>
-          <label htmlFor="image-upload" className="upload-button-profile">
+          <label htmlFor="profile-image-upload" className="upload-button-profile">
             Escolher Imagem Perfil
           </label>
         </div>
-        <MemePreview customText={customText} imageSrc={imageSrc} />
+        <MemePreview 
+          customText={customText} 
+          imageSrc={imageSrc}
+          imageProfile={imageProfile} // Adicionar esta prop
+        />
         <div className="buttons-container mt-4">
           <MemeButtons 
+            setImageProfile={setImageProfile}
             setCustomText={setCustomText}
             setImageSrc={setImageSrc}
             defaultImage={defaultImage}

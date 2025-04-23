@@ -3,13 +3,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import '../styles/MemePreview.css'
 
-function MemePreview({ customText, imageSrc }) {
+function MemePreview({ customText, imageSrc, imageProfile }) {
   return (
     <div className="meme-preview" id="meme-preview">
       <div className="tweet-header">
-        <img src={imageSrc} alt="Perfil" className="profile-pic" />
+        <img src={imageProfile} alt="Perfil" className="profile-pic" />
         <div className="tweet-info">
-          <strong>Safadinhos</strong>
+          <strong>LifeSad</strong>
           <br />
           <span>&nbsp;&nbsp;@EleGosta_4gmal</span>
         </div>
@@ -17,7 +17,7 @@ function MemePreview({ customText, imageSrc }) {
       <div className="tweet-text">{customText}</div>
       <div className="meme-image-container">
         <img className="meme-image" src={imageSrc} alt="Meme" />
-        <p className="meme-caption">@safadinhos</p>
+        <p className="meme-caption">@ThugLife</p>
       </div>
     </div>
   )
@@ -25,7 +25,8 @@ function MemePreview({ customText, imageSrc }) {
 
 MemePreview.propTypes = {
   customText: PropTypes.string.isRequired,
-  imageSrc: PropTypes.string.isRequired
+  imageSrc: PropTypes.string.isRequired,
+  imageProfile: PropTypes.string.isRequired
 }
 
 export default MemePreview
