@@ -3,11 +3,12 @@ import { useState } from 'react'
 import TextInput from './components/TextInput'
 import MemePreview from './components/MemePreview'
 import MemeButtons from './components/MemeButtons'
+import imagemInicial from './images/coringa.jpeg'
 import './App.css'
 
 function App() {
   const defaultText = 'POV: " Você fuma muito? "\n\nEu às 6:00 da manhã:'
-  const defaultImage = '/coringa.jpeg'
+  const [defaultImage, setDefaultImage] = useState(imagemInicial)
   
   const [customText, setCustomText] = useState(defaultText)
   const [imageSrc, setImageSrc] = useState(defaultImage)
@@ -42,8 +43,9 @@ function App() {
     const file = event.target.files[0]
     if (file) {
       const imageUrl = URL.createObjectURL(file)
-      setImageSrc(imageUrl)
-      alert('Imagem carregada com sucesso!')
+      setDefaultImage(imageUrl) // Atualiza a imagem padrão
+      setImageSrc(imageUrl)    // Atualiza a imagem atual
+      alert('Nova imagem definida como padrão!')
     }
   }
 
@@ -60,8 +62,11 @@ function App() {
             onChange={handleImageUpload}
             style={{ display: 'none' }}
           />
-          <label htmlFor="image-upload" className="upload-button">
-            Escolher Nova Imagem
+          <label htmlFor="image-upload" className="upload-button-post">
+            Escolher Imagem Post
+          </label>
+          <label htmlFor="image-upload" className="upload-button-profile">
+            Escolher Imagem Perfil
           </label>
         </div>
         <MemePreview customText={customText} imageSrc={imageSrc} />
