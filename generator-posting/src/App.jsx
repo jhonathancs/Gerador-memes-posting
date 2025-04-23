@@ -23,10 +23,36 @@ function App() {
   const [customText, setCustomText] = useState(defaultText)
   const [imageSrc, setImageSrc] = useState(defaultImage)
 
+  // Estados com valores do localStorage ou valores padrão
+  const [profileName, setProfileName] = useState(() => {
+    return localStorage.getItem('profileName') || 'LifeSad'
+  })
+
+  const [userName, setUserName] = useState(() => {
+    return localStorage.getItem('userName') || 'EleGosta_4gmal'
+  })
+
+  const [watermark, setWatermark] = useState(() => {
+    return localStorage.getItem('watermark') || 'ThugLife'
+  })
+
   // Salva a imagem do perfil no localStorage quando ela mudar
   useEffect(() => {
     localStorage.setItem('profileImage', imageProfile)
   }, [imageProfile])
+
+  // Salva os valores no localStorage quando mudarem
+  useEffect(() => {
+    localStorage.setItem('profileName', profileName)
+  }, [profileName])
+
+  useEffect(() => {
+    localStorage.setItem('userName', userName)
+  }, [userName])
+
+  useEffect(() => {
+    localStorage.setItem('watermark', watermark)
+  }, [watermark])
 
   const handleDownload = () => {
     const meme = document.getElementById('meme-preview')
@@ -49,7 +75,18 @@ function App() {
     })
   }
 
+  // Função de reset atualizada
   const handleReset = () => {
+    // Reset dos valores
+    setProfileName('LifeSad')
+    setUserName('EleGosta_4gmal')
+    setWatermark('ThugLife')
+    
+    // Limpa o localStorage
+    localStorage.removeItem('profileName')
+    localStorage.removeItem('userName')
+    localStorage.removeItem('watermark')
+
     // Reset do texto
     setCustomText(defaultText)
     
@@ -91,7 +128,16 @@ function App() {
   return (
     <div className="flex flex-col items-center bg-gray-100 min-h-screen p-6">
       <h1 className="text-3xl font-bold mb-8">Gerador de Posting</h1>
-      <TextInput customText={customText} setCustomText={setCustomText} />
+      <TextInput 
+        customText={customText} 
+        setCustomText={setCustomText}
+        profileName={profileName} // Nova prop
+        setProfileName={setProfileName} // Nova prop
+        userName={userName}           // Nova prop
+        setUserName={setUserName}    // Nova prop
+        watermark={watermark}         // Nova prop
+        setWatermark={setWatermark}  // Nova prop
+      />
       <div className="meme-container">
         <MemeButtons 
           setCustomText={setCustomText}
@@ -108,6 +154,9 @@ function App() {
           customText={customText} 
           imageSrc={imageSrc}
           imageProfile={imageProfile}
+          profileName={profileName} // Nova prop
+          userName={userName}         // Nova prop
+          watermark={watermark}      // Nova prop
         />
       </div>
       <footer className="footer">

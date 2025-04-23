@@ -74,6 +74,6 @@
   .button {
     width: 50%; /* Um pouco maior para telas muito pequenas */
     font-size: 0.8rem;
-    padding: 0; /* Reduzido para telas menores */
+    padding: 0 1px; /* Reduzido para telas menores */
   }
 }

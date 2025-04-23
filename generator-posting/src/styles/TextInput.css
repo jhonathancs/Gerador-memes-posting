@@ -10,6 +10,16 @@
   margin-bottom: -20px;
 }
 
+/* Novo container para os inputs de perfil */
+.profile-inputs-container {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem; /* Reduzido de 2rem para caber melhor */
+  width: 100%;
+  margin-bottom: 1rem;
+  flex-wrap: nowrap; /* Impede a quebra de linha */
+}
+
 .input-label {
   font-size: 18px;
   font-weight: bold;
@@ -33,4 +43,38 @@
   border-color: #4caf50;
   box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
   outline: none;
+}
+
+.profile-name-input {
+  width: 100%;
+  max-width: 220px; /* Reduzido para caber os três inputs */
+  min-width: 200px; /* Garante um tamanho mínimo */
+}
+
+.profile-name-input input {
+  width: 100%;
+  padding: 10px; /* Reduzido de 12px */
+  font-size: 14px; /* Reduzido de 16px */
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.profile-name-input input:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  outline: none;
+}
+
+/* Adicione media query para responsividade */
+@media (max-width: 768px) {
+  .profile-inputs-container {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .profile-name-input {
+    max-width: 300px; /* Aumenta em telas menores */
+  }
 }

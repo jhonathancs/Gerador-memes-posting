@@ -317,4 +317,8 @@ h1 {
     width: 100%;
     min-width: unset;
   }
+
+  .meme-container {
+    padding: 0rem;
+  }
 }
