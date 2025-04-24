@@ -36,7 +36,7 @@ function FontControls({
           <input
             type="range"
             min="16"
-            max="60"
+            max="100"
             value={profileFontSize}
             onChange={(e) => setProfileFontSize(e.target.value)}
             className="font-slider"
