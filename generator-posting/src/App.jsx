@@ -1,5 +1,6 @@
 // File: src/App.jsx
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import TextInput from './components/TextInput'
 import MemePreview from './components/MemePreview'
 import MemeButtons from './components/MemeButtons'
@@ -7,6 +8,7 @@ import FontControls from './components/FontControls'
 import imagemInicial from './images/coringa.jpeg'
 import './App.css'
 import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa'
+import Mass from './pages/Mass/Mass' // Atualizando o caminho do import
 
 function App() {
   // Configurações iniciais
@@ -179,95 +181,107 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col items-center bg-gray-100 min-h-screen p-6">
-      <h1 className="text-3xl font-bold mb-8">Gerador de Posting</h1>
-      <TextInput 
-        customText={customText} 
-        setCustomText={setCustomText}
-        profileName={profileName} // Nova prop
-        setProfileName={setProfileName} // Nova prop
-        userName={userName}           // Nova prop
-        setUserName={setUserName}    // Nova prop
-        watermark={watermark}         // Nova prop
-        setWatermark={setWatermark}  // Nova prop
-        profileFontSize={profileFontSize}
-        setProfileFontSize={setProfileFontSize}
-        usernameFontSize={usernameFontSize}
-        setUsernameFontSize={setUsernameFontSize}
-        watermarkFontSize={watermarkFontSize}
-        setWatermarkFontSize={setWatermarkFontSize}
-        textFontSize={textFontSize}
-        setTextFontSize={setTextFontSize}
-      />
-      <div className="meme-container">
-        <MemeButtons 
-          setCustomText={setCustomText}
-          setImageSrc={setImageSrc}
-          setImageProfile={setImageProfile}
-          defaultImage={defaultImage}
-          defaultText={defaultText}
-          onDownload={handleDownload}
-          onReset={handleReset}
-          handleImageUpload={handleImageUpload}
-          handleProfileImageUpload={handleProfileImageUpload}
-        />
-        <MemePreview 
-          customText={customText} 
-          imageSrc={imageSrc}
-          imageProfile={imageProfile}
-          profileName={profileName} // Nova prop
-          userName={userName}         // Nova prop
-          watermark={watermark}      // Nova prop
-          profileFontSize={profileFontSize}
-          usernameFontSize={usernameFontSize}
-          watermarkFontSize={watermarkFontSize}
-          textFontSize={textFontSize}
-          profilePicSize={profilePicSize}
-        />
+    <Router>
+      <div className="flex flex-col items-center bg-gray-100 min-h-screen p-6">
+        <h1 className="text-3xl font-bold mb-8">Gerador de Posting</h1>
+        <nav className="navigation">
+          <Link to="/mass" className="nav-button">Mass</Link>
+        </nav>
+        <Routes>
+          <Route path="/mass" element={<Mass />} />
+          <Route path="/" element={
+            <>
+              <TextInput 
+                customText={customText} 
+                setCustomText={setCustomText}
+                profileName={profileName} // Nova prop
+                setProfileName={setProfileName} // Nova prop
+                userName={userName}           // Nova prop
+                setUserName={setUserName}    // Nova prop
+                watermark={watermark}         // Nova prop
+                setWatermark={setWatermark}  // Nova prop
+                profileFontSize={profileFontSize}
+                setProfileFontSize={setProfileFontSize}
+                usernameFontSize={usernameFontSize}
+                setUsernameFontSize={setUsernameFontSize}
+                watermarkFontSize={watermarkFontSize}
+                setWatermarkFontSize={setWatermarkFontSize}
+                textFontSize={textFontSize}
+                setTextFontSize={setTextFontSize}
+              />
+              <div className="meme-container">
+                <MemeButtons 
+                  setCustomText={setCustomText}
+                  setImageSrc={setImageSrc}
+                  setImageProfile={setImageProfile}
+                  defaultImage={defaultImage}
+                  defaultText={defaultText}
+                  onDownload={handleDownload}
+                  onReset={handleReset}
+                  handleImageUpload={handleImageUpload}
+                  handleProfileImageUpload={handleProfileImageUpload}
+                />
+                <MemePreview 
+                  customText={customText} 
+                  imageSrc={imageSrc}
+                  imageProfile={imageProfile}
+                  profileName={profileName} // Nova prop
+                  userName={userName}         // Nova prop
+                  watermark={watermark}      // Nova prop
+                  profileFontSize={profileFontSize}
+                  usernameFontSize={usernameFontSize}
+                  watermarkFontSize={watermarkFontSize}
+                  textFontSize={textFontSize}
+                  profilePicSize={profilePicSize}
+                />
+              </div>
+              <FontControls 
+                profileFontSize={profileFontSize}
+                setProfileFontSize={setProfileFontSize}
+                usernameFontSize={usernameFontSize}
+                setUsernameFontSize={setUsernameFontSize}
+                watermarkFontSize={watermarkFontSize}
+                setWatermarkFontSize={setWatermarkFontSize}
+                textFontSize={textFontSize}
+                setTextFontSize={setTextFontSize}
+                profilePicSize={profilePicSize}
+                setProfilePicSize={setProfilePicSize}
+              />
+            </>
+          } />
+        </Routes>
+        <footer className="footer">
+        <p className="footer-text">Desenvolvido por Jhonathancs</p>
+          <div className="social-icons">
+            <a 
+              href="https://github.com/jhonathancs" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="social-icon"
+            >
+              <FaGithub />
+            </a>
+            <a 
+              href="https://www.linkedin.com/in/jhonathan-cs/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="social-icon"
+            >
+              <FaLinkedin />
+            </a>
+            <a 
+              href="https://www.instagram.com/jhonathan_jcs/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="social-icon"
+            >
+              <FaInstagram />
+            </a>
+          </div>
+         
+        </footer>
       </div>
-      <FontControls 
-        profileFontSize={profileFontSize}
-        setProfileFontSize={setProfileFontSize}
-        usernameFontSize={usernameFontSize}
-        setUsernameFontSize={setUsernameFontSize}
-        watermarkFontSize={watermarkFontSize}
-        setWatermarkFontSize={setWatermarkFontSize}
-        textFontSize={textFontSize}
-        setTextFontSize={setTextFontSize}
-        profilePicSize={profilePicSize}
-        setProfilePicSize={setProfilePicSize}
-      />
-      <footer className="footer">
-      <p className="footer-text">Desenvolvido por Jhonathancs</p>
-        <div className="social-icons">
-          <a 
-            href="https://github.com/jhonathancs" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="social-icon"
-          >
-            <FaGithub />
-          </a>
-          <a 
-            href="https://www.linkedin.com/in/jhonathan-cs/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="social-icon"
-          >
-            <FaLinkedin />
-          </a>
-          <a 
-            href="https://www.instagram.com/jhonathan_jcs/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="social-icon"
-          >
-            <FaInstagram />
-          </a>
-        </div>
-       
-      </footer>
-    </div>
+    </Router>
   )
 }
 
