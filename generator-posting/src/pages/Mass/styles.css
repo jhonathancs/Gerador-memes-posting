@@ -365,3 +365,41 @@
     padding: 1rem;
   }
 }
+
+/* Estilos para a navegação e ícone home */
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  width: 100%;
+  background-color: #f3f4f6;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.home-icon {
+  text-decoration: none;
+  color: #4b5563;
+  transition: all 0.3s ease;
+  order: -1; /* Força o ícone para o início (esquerda) */
+  margin-right: auto; /* Empurra os outros elementos para a direita */
+  padding: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.home-icon-svg {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.home-icon:hover {
+  color: #1f2937;
+}
+
+.home-icon:hover .home-icon-svg {
+  transform: scale(1.1);
+}

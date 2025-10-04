@@ -7,7 +7,7 @@ import MemeButtons from './components/MemeButtons'
 import FontControls from './components/FontControls'
 import imagemInicial from './images/coringa.jpeg'
 import './App.css'
-import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa'
+import { FaGithub, FaLinkedin, FaInstagram, FaHome } from 'react-icons/fa'
 import Mass from './pages/Mass/Mass' // Atualizando o caminho do import
 
 function App() {
@@ -185,6 +185,9 @@ function App() {
       <div className="flex flex-col items-center bg-gray-100 min-h-screen p-6">
         <h1 className="text-3xl font-bold mb-8">Gerador de Posting</h1>
         <nav className="navigation">
+          <Link to="/" className="home-icon">
+            <FaHome className="home-icon-svg" />
+          </Link>
           <Link to="/mass" className="nav-button">Mass</Link>
         </nav>
         <Routes>
